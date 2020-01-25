@@ -1,21 +1,25 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 def list_profiles(request):
 
-    return render(request, 'social/list_profiles', locals())
+    return render(request, 'social/list_profiles.html', locals())
 
-def show_profile(request):
+def show_profile(request, id):
 
-    return render(request, 'social/show_profile', locals())
+    return render(request, 'social/show_profile.html', locals())
 
 def edit_profile(request):
 
-    return render(request, 'social/edit_profile', locals())
+    return render(request, 'social/edit_profile.html', locals())
+
+def save_profile(request):
+
+    return redirect(show_profile, id)
 
 def save_comment(request):
 
-    return render(request, 'social/save_comment', locals())
+    return redirect(show_profile, id)
 
 def save_status(request):
 
-    return render(request, 'social/save_status', locals())
+    return redirect(show_profile, id)
