@@ -28,6 +28,7 @@ class Status(models.Model):
 
 class Comment(models.Model):
     content = models.CharField(max_length=100)
+    author  = models.ForeignKey('Profile', on_delete=models.CASCADE)
     status  = models.ForeignKey('Status', on_delete=models.CASCADE)
     date    = models.DateTimeField(default=timezone.now, verbose_name="Date de création")
 
