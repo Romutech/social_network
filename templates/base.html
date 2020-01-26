@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<style type="text/css">
+		header {
+			position: relative;
+			top: 0;
+			margin-left:8%;
+			margin-right: 8%;
+			width: 84%;
+			height: 60px;
+			padding: 1.2em;
+			background: #E6E6E6;
+		}
+
+		.content {
+			padding-right: 15%;
+			padding-left: 15%;
+		}
+
+		h1 {
+			font-size: 1.4em;
+		}
+
+		h2 {
+			font-size: 1.3em;
+		}
+
+		a {
+			color: black;
+		}
+
+		footer {
+			position: absolute; 
+			bottom: 0;
+			margin-left:8%;
+			margin-right: 8%;
+			width: 84%;
+			height: 90px;
+			padding: 1.2em;
+			background: #E6E6E6;
+		}
+	</style>
+
+	<title>OpenFaceRooms</title>
+  </head>
+  <body>
+  	<header>
+		<h1 style="float: left;"><b>OpenFaceRooms</b></h1>
+		<a style="float: right;" href="/admin/login/">Admin</a>
+     </header>
+
+  	<div class="content" style="margin: 2em">
+    	{% block content %}{% endblock %}
+    </div>
+
+    <footer>
+		Mon super réseau social - Powered by Django
+    </footer>
+  </body>
+</html>
+
+
+

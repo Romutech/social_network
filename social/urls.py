@@ -8,5 +8,6 @@ urlpatterns = [
     path('edit/', views.edit_profile, name='edit_profile'),
     path('save/', views.save_profile, name='save_profile'),
     path('comment/save', views.save_comment, name='save_comment'),
-    path('status/save', views.save_status, name='save_status')
+    path('status/save', views.save_status, name='save_status'),
+    path('signup/', views.signup, name='signup'),
 ]
