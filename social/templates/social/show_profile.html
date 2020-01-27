@@ -21,5 +21,10 @@
 				<i>{{ comment.date }}</i>
 			{% endfor %}
 		</div>
+		<form action="{% url "show_profile" profile.id  %}" method="post">
+		    {% csrf_token %}
+		    {{ form.as_p }}
+		    <input type="submit" value="Submit" />
+		</form>
 	{% endfor %}
 {% endblock%}
