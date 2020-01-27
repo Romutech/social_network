@@ -8,9 +8,18 @@
 	{% for status in statutes %}
 		<p>
 			<b>{{ status.profile }}</b>
-			<i>{{ status.date }}</i><br>
+			<br>
+			<i>{{ status.date }}</i>
+			<br>
 			{{ status }}
+			<br>
 		</p>
+		<div class="border">
+			{% for comment in comments %}
+				{{ comment.content }}
+				<br>
+				<i>{{ comment.date }}</i>
+			{% endfor %}
+		</div>
 	{% endfor %}
-	
 {% endblock%}

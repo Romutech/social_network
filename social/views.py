@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.http import Http404
 from .models import Profile, Status, Comment
 
@@ -13,24 +12,21 @@ def show_profile(request, id):
         profile = Profile.objects.get(id=id)
     except:
         raise Http404
-
     statutes = Status.objects.filter(profile=profile)
+    for status in statutes:
+        comments = Comment.objects.filter(status=status)
     return render(request, 'social/show_profile.html', locals())
 
 def edit_profile(request):
-
     return render(request, 'social/edit_profile.html', locals())
 
 def save_profile(request):
-
     return redirect(show_profile, id)
 
 def save_comment(request):
-
     return redirect(show_profile, id)
 
 def save_status(request):
-
     return redirect(show_profile, id)
 
 def signup(request):
