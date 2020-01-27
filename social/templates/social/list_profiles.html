@@ -2,4 +2,7 @@
 
 {% block content%}
 	<h2>Liste des profils inscrits</h2>
+	{% for profile in profiles %}
+		<p><a href="{% url "show_profile" profile.id %}">{{ profile }}</a></p>
+	{% endfor %}
 {% endblock%}
