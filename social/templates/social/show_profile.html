@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
 {% block content%}
-	<h2>Mon profil</h2>
+	<h2>{{ profile }}</h2>
+	<hr>
+	<h3>Statut(s)</h3>
+	<br>
+	{% for status in statutes %}
+		<p>
+			<b>{{ status.profile }}</b>
+			<i>{{ status.date }}</i><br>
+			{{ status }}
+		</p>
+	{% endfor %}
+	
 {% endblock%}
