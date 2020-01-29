@@ -8,7 +8,7 @@
 	<br>
 	{% for status in statutes %}
 		<p>
-			<h2>{{ status.profile.user.pseudo }}</h2>
+			<h2>{{ status.profile.user.username }}</h2>
 			<i>{{ status.date }}</i>
 			<div class="status">{{ status }}</div>
 		</p>
@@ -16,7 +16,7 @@
 			{% if status.comment_set.all.count > 0 %}
 				{% for comment in status.comment_set.all %}
 					<p>
-						<b>{{ comment.author.pseudo }}</b> : {{ comment.content }}
+						<b>{{ comment.author.username }}</b> : {{ comment.content }}
 						<br>
 						<i>{{ comment.date|naturaltime }}</i>
 					</p>

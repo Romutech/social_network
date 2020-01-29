@@ -14,7 +14,7 @@ class Profile(models.Model):
         verbose_name="Profil"
 
     def __str__(self):
-        return "Profil "
+        return "Profil de {}".format(self.user.username)
 
 
 class Status(models.Model):
