@@ -3,23 +3,20 @@
 {% block content%}
 	<h2>{{ profile }}</h2>
 	<hr>
-	<h3>Statut(s)</h3>
 	<br>
 	{% for status in statutes %}
 		<p>
-			<b>{{ status.profile }}</b>
-			<br>
+			<h2>{{ status.profile.firstname }} {{ status.profile.lastname }}</h2>
 			<i>{{ status.date }}</i>
-			<br>
-			{{ status }}
-			<br>
+			<div class="status">{{ status }}</div>
 		</p>
-		{{ status. }}
 		<div class="border">
 			{% for comment in status.comment_set.all %}
-				{{ comment.content }}
-				<br>
-				<i>{{ comment.date }}</i>
+				<p>
+					<b>{{ comment.author.firstname }} {{ comment.author.lastname }}</b> : {{ comment.content }}
+					<br>
+					<i>{{ comment.date }}</i>
+				</p>
 			{% endfor %}
 		</div>
 		<form action="{% url "show_profile" profile.id  %}" method="post">
@@ -29,5 +26,6 @@
 		    {{ form.as_p }}
 		    <input type="submit" value="Submit" />
 		</form>
+		<hr>
 	{% endfor %}
 {% endblock%}

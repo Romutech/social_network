@@ -22,10 +22,9 @@ def show_profile(request, id):
         comment.status = Status.objects.get(id=request.POST['status'])
         comment.author = Profile.objects.get(id=id)
         comment.save()
+        return redirect(show_profile, id)
 
     statutes = Status.objects.filter(profile=profile)
-    for status in statutes:
-        comments = Comment.objects.filter(status=status)
     return render(request, 'social/show_profile.html', locals())
 
 def edit_profile(request):

@@ -20,29 +20,16 @@
 			background: #E6E6E6;
 		}
 
-		.content {
-			padding-right: 15%;
-			padding-left: 15%;
-		}
-
-		h1 {
-			font-size: 1.4em;
-		}
-
-		h2 {
-			font-size: 1.3em;
-		}
-
-		i {
-			font-size: 0.8em;
-		}
-
-		a {
-			color: black;
-		}
+		.border {padding: 10px;}
+		.content {padding-right: 15%;padding-left: 15%;}
+		.status {font-size: 1.2em;}
+		h1 {font-size: 1.4em;}
+		h2 {font-size: 1.3em;}
+		i {font-size: 0.8em;}
+		a {color: black;}
 
 		footer {
-			position: absolute; 
+			position: relative; 
 			bottom: 0;
 			margin-left:8%;
 			margin-right: 8%;
@@ -59,7 +46,7 @@
   	<header>
 		<h1 style="float: left;"><b>OpenFaceRooms</b></h1>
 		<a style="float: right;" href="/admin/login/">Admin</a>
-     </header>
+    </header>
 
   	<div class="content" style="margin: 2em">
     	{% block content %}{% endblock %}
@@ -70,6 +57,3 @@
     </footer>
   </body>
 </html>
-
-
-
