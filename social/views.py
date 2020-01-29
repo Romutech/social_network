@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404
-from .models import Profile, Status, Comment
+from .models import Profile, Status, Comment, User
 from social.forms import CommentForm
 
 def list_profiles(request):
@@ -16,11 +16,23 @@ def show_profile(request, id):
 
     form = CommentForm(request.POST or None)
     
+
+    try:    
+        if request.POST['type_form'] == 'profile_status':
+            status = Status()
+            status.content = request.POST['content']
+            status.profile = Profile.objects.get(id=request.POST['profile'])
+            status.author = User.objects.get(id=request.POST['author'])
+            status.save()
+            return redirect(show_profile, id)
+    except:
+        pass
+
     if form.is_valid():
         comment = Comment()
         comment.content = request.POST['content']
         comment.status = Status.objects.get(id=request.POST['status'])
-        comment.author = Profile.objects.get(id=id)
+        comment.author = User.objects.get(id=request.POST['author'])
         comment.save()
         return redirect(show_profile, id)
 

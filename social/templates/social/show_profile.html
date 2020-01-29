@@ -14,7 +14,7 @@
 			{% if status.comment_set.all.count > 0 %}
 				{% for comment in status.comment_set.all %}
 					<p>
-						<b>{{ comment.author.firstname }} {{ comment.author.lastname }}</b> : {{ comment.content }}
+						<b>{{ comment.author.pseudo }}</b> : {{ comment.content }}
 						<br>
 						<i>{{ comment.date }}</i>
 					</p>
@@ -23,7 +23,7 @@
 			<div class="border">
 				<form action="{% url "show_profile" profile.id  %}" method="post">
 				    {% csrf_token %}
-				    <input type="hidden" name="author" value="{{ profile.id }}">
+				    <input type="hidden" name="author" value="{{ profile.user.id }}">
 				    <input type="hidden" name="status" value="{{ status.id }}">
 				    {{ form.as_p }}
 				    <input class="btn btn-primary" type="submit" value="Envoyer" />
@@ -32,4 +32,14 @@
 		</div>
 		<hr>
 	{% endfor %}
+		<br>
+		<p>Laissez un statut sur ce profil : </p>
+		<form action="{% url "show_profile" profile.id  %}" method="post">
+		    {% csrf_token %}
+		    <input type="hidden" name="type_form" value="profile_status">
+		    <input type="hidden" name="author" value="{{ profile.user.id }}">
+		    <input type="hidden" name="profile" value="{{ profile.id }}">
+		    <p><input type="text" name="content"></p>
+		    <input class="btn btn-primary" type="submit" value="Envoyer" />
+		</form>
 {% endblock%}

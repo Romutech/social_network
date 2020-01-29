@@ -25,7 +25,8 @@ class Profile(models.Model):
 
 
 class Status(models.Model):
-    content = models.CharField(max_length=100)
+    content = models.CharField(max_length=100, verbose_name="Statut")
+    author  = models.ForeignKey('User', on_delete=models.CASCADE)
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
     date    = models.DateTimeField(default=timezone.now, verbose_name="Date de création")
 
@@ -37,8 +38,8 @@ class Status(models.Model):
 
 
 class Comment(models.Model):
-    content = models.CharField(max_length=100)
-    author  = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    content = models.CharField(max_length=100, verbose_name="Commentaire")
+    author  = models.ForeignKey('User', on_delete=models.CASCADE)
     status  = models.ForeignKey('Status', on_delete=models.CASCADE)
     date    = models.DateTimeField(default=timezone.now, verbose_name="Date de création")
 
