@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load humanize %}
+
 
 {% block content%}
 	<h2>{{ profile }}</h2>
@@ -6,7 +8,7 @@
 	<br>
 	{% for status in statutes %}
 		<p>
-			<h2>{{ status.profile.firstname }} {{ status.profile.lastname }}</h2>
+			<h2>{{ status.profile.user.pseudo }}</h2>
 			<i>{{ status.date }}</i>
 			<div class="status">{{ status }}</div>
 		</p>
@@ -16,7 +18,7 @@
 					<p>
 						<b>{{ comment.author.pseudo }}</b> : {{ comment.content }}
 						<br>
-						<i>{{ comment.date }}</i>
+						<i>{{ comment.date|naturaltime }}</i>
 					</p>
 				{% endfor %}
 			{% endif %}
