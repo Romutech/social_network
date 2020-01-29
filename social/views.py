@@ -15,9 +15,13 @@ def show_profile(request, id):
         raise Http404
 
     form = CommentForm(request.POST or None)
-
+    
     if form.is_valid():
-        form.save()
+        comment = Comment()
+        comment.content = request.POST['content']
+        comment.status = Status.objects.get(id=request.POST['status'])
+        comment.author = Profile.objects.get(id=id)
+        comment.save()
 
     statutes = Status.objects.filter(profile=profile)
     for status in statutes:
