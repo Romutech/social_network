@@ -1,5 +1,6 @@
 from django import forms
 from .models import Comment
+from django.contrib.auth.models import User
 
 class CommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -9,3 +10,4 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('content',)
        
+from django import forms

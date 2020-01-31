@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.http import Http404
 from .models import Profile, ProfileStatus, Comment, User
 from social.forms import CommentForm
+from django.contrib.auth.forms import UserCreationForm
 
 def list_profiles(request):
     profiles = Profile.objects.all()
@@ -53,7 +54,7 @@ def save_status(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
