@@ -16,7 +16,11 @@
 			{% if status.comment_set.all.count > 0 %}
 				{% for comment in status.comment_set.all %}
 					<p>
-						<b>{{ comment.author.username }}</b> : {{ comment.content }}
+						{% if comment.author.username == profile.user.username %}
+							<b>{{ comment.author.username }}</b> : {{ comment.content }}
+						{% else %}
+							<b>{{ comment.author.username }} -> {{ profile.user.username }}</b> : {{ comment.content }}</p>
+						{% endif %}
 						<br>
 						<i>{{ comment.date|naturaltime }}</i>
 					</p>
