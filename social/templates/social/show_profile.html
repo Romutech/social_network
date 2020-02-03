@@ -31,7 +31,7 @@
 				    {% csrf_token %}
 				    <input type="hidden" name="type_form" value="comment_status">
 				    <input type="hidden" name="author" value="{{ profile.user.id }}">
-				    <input type="hidden" name="status" value="1">
+				    <input type="hidden" name="status" value="{{ status.id }}">
 				    {{ form.as_p }}
 				    <input class="btn btn-primary" type="submit" value="Envoyer" />
 				</form>
