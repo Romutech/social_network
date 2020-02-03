@@ -30,7 +30,7 @@
 				<form action="{% url "show_profile" profile.id  %}" method="post">
 				    {% csrf_token %}
 				    <input type="hidden" name="author" value="{{ profile.user.id }}">
-				    <input type="hidden" name="status" value="{{ status.id }}">
+				    <input type="text" name="status" value="{{ status.id }}">
 				    {{ form.as_p }}
 				    <input class="btn btn-primary" type="submit" value="Envoyer" />
 				</form>
