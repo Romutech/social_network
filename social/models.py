@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User as Users
+from django.contrib.auth.models import User as User_Auth
 
-class User(Users):
+class User(User_Auth):
    pass
 
 class Profile(models.Model):
-    user      = models.ForeignKey(Users, on_delete=models.CASCADE) 
+    user      = models.ForeignKey(User_Auth, on_delete=models.CASCADE) 
     date      = models.DateTimeField(default=timezone.now, verbose_name="Date de création")
 
     class Meta:
