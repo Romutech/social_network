@@ -16,11 +16,6 @@ def show_profile(request, id):
     except:
         raise Http404
 
-  
-
-    form = CommentForm(request.POST or None)  
-
-
     try:    
         if request.POST['type_form'] == 'profile_status':
             status = ProfileStatus()
@@ -32,6 +27,8 @@ def show_profile(request, id):
     except:
         pass
 
+    form = CommentForm(request.POST or None) 
+
     try:  
         if request.POST['type_form'] == 'comment_status':
             if form.is_valid():
@@ -41,8 +38,6 @@ def show_profile(request, id):
                 comment.author = User_Auth.objects.get(id=request.user.id)
                 comment.save()
                 return redirect(show_profile, id)
-                  
-
     except:
         pass
 
