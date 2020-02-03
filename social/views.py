@@ -16,32 +16,35 @@ def show_profile(request, id):
     except:
         raise Http404
 
-    dded = User_Auth.objects.get(id=request.user.id)
-    
-    form = CommentForm(request.POST or None)
+  
+
+    form = CommentForm(request.POST or None)  
+
 
     try:    
         if request.POST['type_form'] == 'profile_status':
             status = ProfileStatus()
             status.content = request.POST['content']
             status.profile = Profile.objects.get(id=request.POST['profile'])
-            status.author = User_Auth.objects.get(id=user.profile)
+            status.author = User_Auth.objects.get(id=request.user.id)
             status.save()
             return redirect(show_profile, id)
     except:
         pass
 
-    ized= request.POST['status']
+    try:  
+        if request.POST['type_form'] == 'comment_status':
+            if form.is_valid():
+                comment = Comment()
+                comment.content = request.POST['content']
+                comment.status = ProfileStatus.objects.get(id=request.POST['status'])
+                comment.author = User_Auth.objects.get(id=request.user.id)
+                comment.save()
+                return redirect(show_profile, id)
+                  
 
-    zd= ized
-
-    if form.is_valid():
-        comment = Comment()
-        comment.content = request.POST['content']
-        comment.status = ized
-        comment.author = User.objects.get(id=user.profile)
-        comment.save()
-        return redirect(show_profile, id)
+    except:
+        pass
 
     statutes = ProfileStatus.objects.filter(profile=profile)
     return render(request, 'social/show_profile.html', locals())

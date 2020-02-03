@@ -18,7 +18,7 @@ class Profile(models.Model):
 
 class Message(models.Model):
     content = models.CharField(max_length=100, verbose_name="")
-    author  = models.ForeignKey('User', on_delete=models.CASCADE)
+    author  = models.CharField(max_length=100, verbose_name="")
     date    = models.DateTimeField(default=timezone.now, verbose_name="Date de création")
 
 class ProfileStatus(Message):
@@ -39,4 +39,3 @@ class Comment(Message):
 
     def __str__(self):
         return self.content
-
