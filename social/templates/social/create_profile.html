@@ -1,0 +1,14 @@
+
+{% extends "base.html" %}
+
+{% block content%}
+	<div class="border">
+		<form action="{% url "create_profile" %}" method="post">
+		    {% csrf_token %}
+		    <input type="hidden" name="user" value="{{ request.user.id }}">
+		    {{ form.as_p }}
+		    <input class="btn btn-primary" type="submit" value="Envoyer" />
+		</form>
+	</div>
+{% endblock%}
+

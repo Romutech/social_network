@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 class User(User):
    pass
 
-
 class Profile(models.Model):
     user      = models.ForeignKey(User, on_delete=models.CASCADE) #Todo manage User model
     date      = models.DateTimeField(default=timezone.now, verbose_name="Date de création")

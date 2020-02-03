@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment
+from .models import Comment, Profile
 from django.contrib.auth.models import User
 
 class CommentForm(forms.ModelForm):
@@ -10,4 +10,8 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('content',)
        
-from django import forms
+
+class ProfileForm(forms.Form):
+    class Meta:
+        model = Profile
+        fields = ('__all__')
