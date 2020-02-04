@@ -5,6 +5,8 @@ from .models import Profile, ProfileStatus, Comment, save_status, save_comment
 from social.forms import CommentForm, ProfileForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User as User_Auth
+from django.contrib.auth import logout, authenticate, login
+from django.contrib import messages
 
 def list_profiles(request):
     profiles = Profile.objects.all()
@@ -40,3 +42,27 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'social/signup.html', {'form': form})
+
+def signin(request):
+    return render(request, 'social/login.html')
+
+def login_user(request):
+    username = request.POST["username"]
+    password = request.POST["password"]
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
+        login(request, user)
+        messages.add_message(request, messages.SUCCESS, "Vous êtes connecté !")
+        return redirect(list_profiles)
+    else:
+        messages.add_message(request, messages.ERROR, "Les champs renseignés sont invalides.")
+        
+    return redirect(signin)
+    
+
+
+
+def logout_view(request):
+    logout(request)
+    return redirect(list_profiles)
