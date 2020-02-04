@@ -14,7 +14,7 @@ class Profile(models.Model):
         verbose_name="Profil"
 
     def __str__(self):
-        return "Profil de {}".format(self.user)
+        return "Profil de {}".format(User_Auth.objects.get(id=self.user))
 
 class Message(models.Model):
     content = models.CharField(max_length=100, verbose_name="")
@@ -39,3 +39,33 @@ class Comment(Message):
 
     def __str__(self):
         return self.content
+
+
+def save_status(request):
+    try:
+        if request.POST['type_form'] == 'profile_status':
+            status = ProfileStatus()
+            status.content = request.POST['content']
+            status.profile = Profile(id=request.POST['profile'])
+            status.author = request.user.id
+            status.save()
+            return True
+    except:
+        pass
+
+    return False
+
+def save_comment(request, form):
+    try:  
+        if request.POST['type_form'] == 'comment_status':
+            if form.is_valid():
+                comment = Comment()
+                comment.content = request.POST['content']
+                comment.status = ProfileStatus.objects.get(id=request.POST['status'])
+                comment.author = request.user.id
+                comment.save()
+                return True
+    except:
+        pass
+
+    return False
