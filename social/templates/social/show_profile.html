@@ -8,7 +8,11 @@
 	<br>
 	{% for status in statutes %}
 		<p>
-			<h2>{{ status.profile.user.username }}</h2>
+			{% if status.author == status.profile.user %}
+				<b>{{ status.author }}</b>
+			{% else %}
+				<b>{{ status.author }}</b> -> <b>{{ status.profile.user }}</b>
+			{% endif %}
 			<i>{{ status.date }}</i>
 			<div class="status">{{ status }}</div>
 		</p>
@@ -16,11 +20,7 @@
 			{% if status.comment_set.all.count > 0 %}
 				{% for comment in status.comment_set.all %}
 					<p>
-						{% if comment.author.username == profile.user.username %}
-							<b>{{ comment.author.username }}</b> : {{ comment.content }}
-						{% else %}
-							<b>{{ comment.author.username }} -> {{ profile.user.username }}</b> : {{ comment.content }}</p>
-						{% endif %}
+						<b>{{ comment.author }}</b> : {{ comment.content }}
 						<br>
 						<i>{{ comment.date|naturaltime }}</i>
 					</p>
