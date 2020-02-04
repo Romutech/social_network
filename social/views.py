@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
 from django.http import Http404
 from .models import Profile, ProfileStatus, Comment, save_status, save_comment
 from social.forms import CommentForm, ProfileForm
