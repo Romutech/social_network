@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content%}
+	<h2>Connexion à OpenFaceRooms</h2>
+	<form method="post" action="{% url 'login_user' %}">
+	  {% csrf_token %}
+	    <p> Nom d'utilisateur : <input type="text" id="username" name="username" /></p>
+	    <p>Mot de passe : <input type="password" name="password" /></p>
+	  	<button type="submit" class="btn btn-primary">Connexion</button>
+	</form>
+{% endblock%}

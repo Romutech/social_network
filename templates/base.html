@@ -47,10 +47,28 @@
   <body>
   	<header>
 		<h1 style="float: left;"><b>OpenFaceRooms</b></h1>
-		<a style="float: right;" href="/admin/login/">Admin</a>
+		{% if request.user.is_authenticated %}
+			<p style="float: right;">Vous êtes connecté en tant que {{ request.user }} <a style="float: right;" href="/logout">(Déconnexion)</a></p>
+		{% else %}
+			<div style="float: right;">
+				<a style="float: right;" href="/signin"> (Connexion)</a>  
+				<a style="float: right;" href="/signup"> (Inscription)</a>
+			</div>
+		{% endif %}
     </header>
 
   	<div class="content" style="margin: 2em">
+  		
+  		{% if messages %}
+  			<div class="alert alert-warning" role="alert">
+				<ul class="messages">
+				    {% for message in messages %}
+				    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				    {% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+		
     	{% block content %}{% endblock %}
     </div>
 
