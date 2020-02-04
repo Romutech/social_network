@@ -3,6 +3,11 @@
 
 
 {% block content%}
+	<div>
+		<p><a href="{% url "list_profiles" %}">Afficher la liste des profils</a></p>
+		<hr>
+	</div>
+
 	{% if request.user.is_authenticated %}
 		<h2>{{ profile }}</h2>
 	<hr>
