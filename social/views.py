@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404
-from .models import Profile, ProfileStatus, save_status, save_comment
+from .models import Profile, ProfileStatus, Comment, save_status, save_comment
 from social.forms import CommentForm, ProfileForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User as User_Auth
@@ -23,21 +23,6 @@ def show_profile(request, id):
         return redirect(show_profile, id)
     return render(request, 'social/show_profile.html', locals())
 
-def edit_profile(request):
-    return render(request, 'social/edit_profile.html', locals())
-
-def create_profile(request):
-    form = ProfileForm(request.POST or None)
-    user = User_Auth.objects.get(id=request.user.id)
-    ref = User_Auth.objects.all()
-    if form.is_valid():
-        profile = Profile()
-        profile.user = user
-        profile.save()
-        return redirect(list_profiles)
-    return render(request, 'social/create_profile.html', locals())
-
-
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -47,7 +32,8 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             profile = Profile()
-            profile.user = user.id
+            profile.user = user
+            profile.username = user.username
             profile.save()
             login(request, user)
             return redirect(list_profiles)
