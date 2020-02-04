@@ -59,10 +59,11 @@ def login_user(request):
         messages.add_message(request, messages.ERROR, "Les champs renseignés sont invalides.")
         
     return redirect(signin)
-    
-
-
 
 def logout_view(request):
     logout(request)
+    if request.user.is_authenticated:
+        messages.add_message(request, messages.SUCCESS, "Vous êtes toujours connecté !")
+    else:
+        messages.add_message(request, messages.SUCCESS, "Vous êtes bien déconnecté !")
     return redirect(list_profiles)

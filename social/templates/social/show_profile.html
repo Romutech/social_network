@@ -3,7 +3,8 @@
 
 
 {% block content%}
-	<h2>{{ profile }}</h2>
+	{% if request.user.is_authenticated %}
+		<h2>{{ profile }}</h2>
 	<hr>
 	<br>
 	{% for status in statutes %}
@@ -49,4 +50,7 @@
 		    <p><input type="text" name="content" placeholder="Ajouter un status"></p>
 		    <input class="btn btn-primary" type="submit" value="Envoyer" />
 		</form>
+	{% else %}
+		<p>Connectez-vous ou inscrivez-vous, pour voir ce profil ! </p>
+	{% endif %}
 {% endblock%}
