@@ -4,17 +4,16 @@ from django.contrib.auth.models import User as User_Auth
 
 class User(User_Auth):
     pass
-
-
 class Profile(models.Model):
     user      = models.CharField(max_length=100, verbose_name="")
+    username  = models.CharField(max_length=100, verbose_name="")
     date      = models.DateTimeField(default=timezone.now, verbose_name="Date de création")
 
     class Meta:
         verbose_name="Profil"
 
     def __str__(self):
-        return "Profil de {}".format(User_Auth.objects.get(id=self.user))
+        return self.username
 
 class Message(models.Model):
     content = models.CharField(max_length=100, verbose_name="")
@@ -47,7 +46,7 @@ def save_status(request):
             status = ProfileStatus()
             status.content = request.POST['content']
             status.profile = Profile(id=request.POST['profile'])
-            status.author = request.user.id
+            status.author = request.user.username
             status.save()
             return True
     except:
@@ -62,7 +61,7 @@ def save_comment(request, form):
                 comment = Comment()
                 comment.content = request.POST['content']
                 comment.status = ProfileStatus.objects.get(id=request.POST['status'])
-                comment.author = request.user.id
+                comment.author = request.user.username
                 comment.save()
                 return True
     except:
